@@ -18,7 +18,7 @@ function App() {
   const [survey, setSurvey] = useState<ISurvey | null>(null);
   const [surveyResponse, setSurveyResponse] = useState<ISurveyResponse| null>(null);
   const [count,setCount] = useState<any>()
-  const [response, setResponse] = useState<any>([]);
+
   
   useEffect(() => {
     const loadSurvey = async (): Promise<void> => {
@@ -85,7 +85,7 @@ useEffect(()=>{
             survey={survey}/>
           </Route>
           <Route path="/count">
-            <CountView surveyId={1} questions={survey?.content.questions} setResponse={setResponse} response={response}/>
+            <CountView />
           </Route>
         </Switch>
       </Container>

@@ -5,27 +5,15 @@ import SurveyResponse, { ISurveyResponse } from "../entities/SurveyResponse";
 import {Container, Button} from 'react-bootstrap';
 
 interface SurveyProps {
-    surveyId: number;
-    questions:any;
-    setResponse:any
-    response:any
+
 }
 
 
 const CountView = (props: SurveyProps) => {
-    // const [response, setResponse] = useState<any>()
-    const {setResponse,response} = props
-    const [newData, setdata] = useState<any>();
+    const [response, setResponse] = useState<any>([]);
     const [key, setKey] = useState<any>();
     const [values, setValues] = useState<any>();
-    const onSurveySubmit = () => {
-        
-    }   
-    // {
-    //     question: {
-    //         answer : 0
-    //     }
-    // }
+
     useEffect(()=>{
         let temp:any = {}
         let keys:any = []
@@ -50,7 +38,7 @@ const CountView = (props: SurveyProps) => {
       console.log(map.values())
       setValues(val)
       setKey(keys)
-    },[])
+    },[response])
 
     useEffect(() => {
         const loadSurvey = async (): Promise<void> => {
@@ -58,14 +46,14 @@ const CountView = (props: SurveyProps) => {
             let data;
             try {
                 data = await response.json();
-                // console.log("data",data)
             } catch(error) {
                 console.error(error);
                 data = null;
             }
 
+            setResponse(data)
             if (response.ok) {
-                setResponse(data)
+                
             } else {
                 console.error(`API failure: ${response.status}`, data);
             }
